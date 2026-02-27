@@ -9,14 +9,14 @@
             text-align: center;
             font-family: sans-serif;
             margin-top: 50px;
-            background-color: white;   /* force white background */
-            color: black;             /* force black text */
+            background-color: white;
+            color: black;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #0088cc; /* Telegram-blue button */
+            background-color: #0088cc;
             color: white;
             border: none;
             border-radius: 5px;
@@ -28,21 +28,30 @@
 </head>
 <body>
 
-    <h1>Hello from Telegram Web App 🚀</h1>
-    <button onclick="sendData()">Send Data to Bot</button>
+<h1>Hello from Telegram Web App 🚀</h1>
+<button onclick="sendData()">Send Data to Bot</button>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
+<script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
 
-        // Force white theme for Telegram Web App colors
+    // Function to apply white theme
+    function applyWhiteTheme() {
+        document.body.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#000000";
         tg.backgroundColor = "#ffffff";
         tg.textColor = "#000000";
+    }
 
-        function sendData() {
-            tg.sendData("User clicked the button");
-        }
-    </script>
+    applyWhiteTheme(); // apply on load
+
+    // Re-apply theme if Telegram user changes it
+    tg.onEvent('themeChanged', applyWhiteTheme);
+
+    function sendData() {
+        tg.sendData("User clicked the button");
+    }
+</script>
 
 </body>
 </html>
