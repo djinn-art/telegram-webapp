@@ -5,21 +5,24 @@
     <title>My Telegram WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        /* Force white page */
         body {
             text-align: center;
             font-family: sans-serif;
             margin-top: 50px;
-            background-color: white;
-            color: black;
+            background-color: #ffffff; /* white background */
+            color: #000000;           /* black text */
+            transition: background-color 0.3s, color 0.3s;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #0088cc;
+            background-color: #0088cc; /* Telegram-blue button */
             color: white;
             border: none;
             border-radius: 5px;
+            transition: background-color 0.2s;
         }
         button:hover {
             background-color: #006699;
@@ -33,9 +36,11 @@
 
 <script>
     const tg = window.Telegram.WebApp;
+
+    // Expand to full height
     tg.expand();
 
-    // Function to apply white theme
+    // Function to force white theme
     function applyWhiteTheme() {
         document.body.style.backgroundColor = "#ffffff";
         document.body.style.color = "#000000";
@@ -43,9 +48,10 @@
         tg.textColor = "#000000";
     }
 
-    applyWhiteTheme(); // apply on load
+    // Apply immediately
+    applyWhiteTheme();
 
-    // Re-apply theme if Telegram user changes it
+    // Re-apply if Telegram user changes theme
     tg.onEvent('themeChanged', applyWhiteTheme);
 
     function sendData() {
